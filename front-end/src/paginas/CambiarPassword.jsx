@@ -4,7 +4,6 @@ import AdminNav from "../components/AdminNav";
 import useAuth from "../hooks/useAuth";
 
 
-
 const CambiarPassword = () => {
 
   const { guardarPassword} = useAuth();
@@ -15,7 +14,7 @@ const CambiarPassword = () => {
     pwd_nuevo: ''
   });
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     if( Object.values(password).some( campo => campo === '' )){
@@ -35,7 +34,9 @@ const CambiarPassword = () => {
       return;
     }
 
-    guardarPassword(password);
+    const respuesta = await guardarPassword(password);
+
+    setAlerta(respuesta);
 
   };
 
